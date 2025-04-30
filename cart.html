@@ -36,6 +36,18 @@
       font-weight: bold;
       margin-top: 1rem;
     }
+    .checkout-button {
+      margin-top: 2rem;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .checkout-button:hover {
+      background-color: #218838;
+    }
   </style>
 </head>
 <body>
@@ -48,7 +60,7 @@
   </div>
   <div>
     <button onclick="clearCart()">清空購物車</button>
-    <button onclick="checkout()">結帳</button>
+    <button class="checkout-button" onclick="window.location.href='checkout.html'">結帳</button>
   </div>
 
   <script>
@@ -101,11 +113,6 @@
       localStorage.removeItem('cart');
       cart = [];
       updateCart();
-    }
-
-    // 結帳模擬
-    function checkout() {
-      alert('結帳功能尚未實作');
     }
 
     updateCart(); // 初次載入時顯示購物車
