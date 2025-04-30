@@ -88,6 +88,24 @@
     color: var(--accent);
     margin-top: 0.5rem;
   }
+  .product {
+      background: #222;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    }
+    .cart {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #ff6347;
+      color: #fff;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
 </style>
 
 </head>
@@ -99,6 +117,8 @@
     <a href="index.html">首頁</a>
     <a href="products.html">商品</a>
     <a href="about.html">關於我們</a>
+    <a href="cart.html">購物車</a>
+    <span id="cart-count" class="cart">0</span>
     <button class="toggle-mode" onclick="toggleMode()">切換模式</button>
   </nav>
 </header>
@@ -110,16 +130,19 @@
         <img src="https://images.unsplash.com/photo-1585386959984-a415522510d9?w=600&q=80" alt="黑膠 T 恤">
         <h3>復古黑膠 T 恤</h3>
         <p>靈感來自黑膠封面，簡約又有型</p>
+        <button onclick="addToCart('復古黑膠 T 恤', 1)">加入購物車</button>
       </div>
       <div class="product">
         <img src="https://images.unsplash.com/photo-1585386959303-03d48cb42d68?w=600&q=80" alt="任天堂風格 T">
         <h3>懷舊遊戲 T</h3>
         <p>懷舊任天堂風格，像素圖案滿滿回憶</p>
+        <button onclick="addToCart('懷舊遊戲 T', 1)">加入購物車</button>
       </div>
       <div class="product">
         <img src="https://images.unsplash.com/photo-1618354691373-d6fce2f9c121?w=600&q=80" alt="霓虹城市風格 T">
         <h3>霓虹都市 T</h3>
         <p>夜景霓虹風，賽博龐克迷不可錯過</p>
+        <button onclick="addToCart('霓虹都市 T', 1)">加入購物車</button>
       </div>
     </div>
   </main>
@@ -131,6 +154,26 @@
   function toggleMode() {
     document.body.classList.toggle("light-mode");
   }
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // 顯示購物車數量
+    function updateCartCount() {
+      document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    // 加入購物車
+    function addToCart(productName, quantity) {
+      let item = cart.find(item => item.name === productName);
+      if (item) {
+        item.quantity += quantity;
+      } else {
+        cart.push({ name: productName, quantity: quantity });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    }
+
+    updateCartCount(); // 初次載入時更新購物車數量
 </script>
 
 </body>
