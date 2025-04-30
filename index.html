@@ -48,25 +48,14 @@
     color: var(--text);
     text-decoration: none;
   }
-  body.dark-mode {
-      background-color: #333;
-      color: #f4f4f4;
-    }
-
-    .mode-toggle {
-      padding: 10px 20px;
-      background-color: #ff6347;
-      color: white;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      position: fixed;
-      top: 10px;
-      right: 10px;
-    }
-    .mode-toggle:hover {
-      background-color: #e53e34;
-    }
+  .toggle-mode {
+    background: var(--accent);
+    border: none;
+    color: #000;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   main {
     max-width: 1000px;
     margin: auto;
@@ -110,8 +99,7 @@
     <a href="index.html">首頁</a>
     <a href="products.html">商品</a>
     <a href="about.html">關於我們</a>
-    <a href="cart.html">購物車</a>
-    <button class="mode-toggle" onclick="toggleMode()">切換模式</button>
+    <button class="toggle-mode" onclick="toggleMode()">切換模式</button>
   </nav>
 </header>
 
@@ -125,22 +113,9 @@
   &copy; 2025 RetroTee 復古潮T | 設計與靈魂並存。
 </footer>
 <script>
-      // 檢查 localStorage 是否有儲存模式設定
-    const currentMode = localStorage.getItem('mode');
-
-    // 如果有儲存的模式設定，應用該模式
-    if (currentMode === 'dark') {
-      document.body.classList.add('dark-mode');
-    }
-
-    // 切換模式
-    function toggleMode() {
-      document.body.classList.toggle('dark-mode');
-      const mode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-      
-      // 儲存當前模式設定到 localStorage
-      localStorage.setItem('mode', mode);
-    }
+  function toggleMode() {
+    document.body.classList.toggle("light-mode");
+  }
 </script>
 
 </body>
