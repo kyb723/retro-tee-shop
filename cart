@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>購物車 - RetroTee</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      padding: 2rem;
+    }
+    .cart-items {
+      margin-bottom: 2rem;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+    .cart-item button {
+      background-color: #ff6347;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    .cart-item button:hover {
+      background-color: #e53e34;
+    }
+  </style>
+</head>
+<body>
+  <h1>你的購物車</h1>
+  <div id="cart-items" class="cart-items">
+    <!-- 購物車商品列表將動態生成 -->
+  </div>
+  <div>
+    <button onclick="clearCart()">清空購物車</button>
+    <button onclick="checkout()">結帳</button>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function updateCart() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.innerHTML = ''; // 清空內容
+      cart.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+          <span>${item.name} x ${item.quantity}</span>
+          <button onclick="removeItem(${index})">移除</button>
+        `;
+        cartItemsContainer.appendChild(div);
+      });
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    function clearCart() {
+      localStorage.removeItem('cart');
+      cart = [];
+      updateCart();
+    }
+
+    function checkout() {
+      alert('結帳功能尚未實作');
+    }
+
+    updateCart(); // 初次載入時顯示購物車
+  </script>
+</body>
+</html>
