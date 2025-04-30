@@ -19,6 +19,9 @@
       padding: 1rem;
       border-bottom: 1px solid #ccc;
     }
+    .cart-item input {
+      width: 40px;
+    }
     .cart-item button {
       background-color: #ff6347;
       color: white;
@@ -29,12 +32,19 @@
     .cart-item button:hover {
       background-color: #e53e34;
     }
+    .total {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
   <h1>你的購物車</h1>
   <div id="cart-items" class="cart-items">
     <!-- 購物車商品列表將動態生成 -->
+  </div>
+  <div class="total">
+    <span>總計: </span><span id="total-price">0</span>
   </div>
   <div>
     <button onclick="clearCart()">清空購物車</button>
@@ -44,32 +54,56 @@
   <script>
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+    // 顯示購物車商品
     function updateCart() {
       const cartItemsContainer = document.getElementById('cart-items');
       cartItemsContainer.innerHTML = ''; // 清空內容
+
+      let total = 0;
       cart.forEach((item, index) => {
         const div = document.createElement('div');
         div.classList.add('cart-item');
+        const price = 500;  // 假設每件商品的價格為 500
+        const itemTotal = price * item.quantity;
+
         div.innerHTML = `
-          <span>${item.name} x ${item.quantity}</span>
+          <span>${item.name} x <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)" /></span>
+          <span>$${itemTotal}</span>
           <button onclick="removeItem(${index})">移除</button>
         `;
         cartItemsContainer.appendChild(div);
+
+        total += itemTotal;
       });
+
+      document.getElementById('total-price').textContent = total;
     }
 
+    // 更新商品數量
+    function updateQuantity(index, quantity) {
+      if (quantity < 1) {
+        quantity = 1;  // 最小為1
+      }
+      cart[index].quantity = parseInt(quantity);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+
+    // 刪除商品
     function removeItem(index) {
       cart.splice(index, 1);
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCart();
     }
 
+    // 清空購物車
     function clearCart() {
       localStorage.removeItem('cart');
       cart = [];
       updateCart();
     }
 
+    // 結帳模擬
     function checkout() {
       alert('結帳功能尚未實作');
     }
