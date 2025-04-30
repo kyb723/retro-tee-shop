@@ -151,8 +151,18 @@
   &copy; 2025 RetroTee 復古潮T | 設計與靈魂並存。
 </footer>
 <script>
+    // 初始載入時，根據 localStorage 設定模式
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode === 'light') {
+      document.body.classList.add('light-mode');
+    }
+  });
+
   function toggleMode() {
-    document.body.classList.toggle("light-mode");
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    localStorage.setItem('mode', isLight ? 'light' : 'dark');
   }
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
