@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RetroTee 復古潮T商店</title>
+  <style>
+    :root {
+      --bg: #1b1b2f;
+      --bg-dark: #121212;
+      --accent: #00f5d4;
+      --accent-hover: #00cdb2;
+      --text: #f5f5f5;
+      --subtext: #ccc;
+      --card: #222;
+    }
+    body.light-mode {
+      --bg: #fefefe;
+      --bg-dark: #ffffff;
+      --accent: #3a0ca3;
+      --accent-hover: #4361ee;
+      --text: #111;
+      --subtext: #333;
+      --card: #f0f0f0;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      transition: all 0.3s ease;
+    }
+    header {
+      background: var(--bg-dark);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--accent);
+    }
+    header h1 {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+    .toggle-mode {
+      background: var(--accent);
+      border: none;
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .intro p {
+      color: var(--subtext);
+      font-size: 1.1rem;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .product {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .product:hover {
+      transform: scale(1.05);
+    }
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .product h3 {
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .product p {
+      color: var(--subtext);
+    }
+    .buy-button {
+      background: var(--accent);
+      color: #000;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 0.8rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .buy-button:hover {
+      background: var(--accent-hover);
+    }
+    #cart {
+      margin-top: 2rem;
+      background: var(--card);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    #cart h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    .remove-btn {
+      background: #ff4d6d;
+      border: none;
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--bg-dark);
+      color: var(--subtext);
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RetroTee 復古潮T</h1>
+    <button class="toggle-mode" onclick="toggleMode()">切換模式</button>
+  </header>
+  <main>
+    <div class="intro">
+      <p>潮流重返，穿上 90s 的靈魂！精選復古 T 恤，展現個人風格。</p>
+    </div>
+    <div class="product-grid">
+      <div class="product">
+        <img src="https://via.placeholder.com/400x400?text=Vintage+Tee+1" alt="復古黑膠 T 恤">
+        <h3>復古黑膠 T 恤</h3>
+        <p>靈感來自1980年代黑膠封面，極具收藏價值。</p>
+        <div class="buy-button" onclick="addToCart('復古黑膠 T 恤')">加入購物車</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/400x400?text=Vintage+Tee+2" alt="老派遊戲機 T 恤">
+        <h3>老派遊戲機 T 恤</h3>
+        <p>懷舊任天堂風格，喚醒童年記憶。</p>
+        <div class="buy-button" onclick="addToCart('老派遊戲機 T 恤')">加入購物車</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/400x400?text=Vintage+Tee+3" alt="霓虹城市 T 恤">
+        <h3>霓虹城市 T 恤</h3>
+        <p>融合賽博龐克與東京夜景，科技感十足。</p>
+        <div class="buy-button" onclick="addToCart('霓虹城市 T 恤')">加入購物車</div>
+      </div>
+    </div>
+    <div id="cart">
+      <h2>🛒 購物車</h2>
+      <div id="cart-items">尚未加入商品。</div>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 RetroTee 復古潮T | 設計與靈魂並存。
+  </footer>
+  <script>
+    const cart = [];
+    function addToCart(item) {
+      cart.push(item);
+      renderCart();
+    }
+    function removeItem(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+    function renderCart() {
+      const cartDiv = document.getElementById("cart-items");
+      if (cart.length === 0) {
+        cartDiv.innerHTML = "尚未加入商品。";
+        return;
+      }
+      cartDiv.innerHTML = "";
+      cart.forEach((item, index) => {
+        cartDiv.innerHTML += `
+          <div class="cart-item">
+            ${item}
+            <button class="remove-btn" onclick="removeItem(${index})">移除</button>
+          </div>
+        `;
+      });
+    }
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+    }
+  </script>
+</body>
+</html>
