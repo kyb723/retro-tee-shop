@@ -1,89 +1,137 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <title>商品 - RetroTee 復古潮T</title>
-  <style>
-    /* 保持原有樣式，新增購物車樣式 */
-    .product {
-      background: #222;
-      border-radius: 8px;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-    }
-    .cart {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background: #ff6347;
-      color: #fff;
-      padding: 10px;
-      border-radius: 50%;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-  </style>
+  
+<style>
+  :root {
+    --bg: #1b1b2f;
+    --bg-dark: #121212;
+    --accent: #00f5d4;
+    --accent-hover: #00cdb2;
+    --text: #f5f5f5;
+    --subtext: #ccc;
+    --card: #222;
+  }
+  body.light-mode {
+    --bg: #fefefe;
+    --bg-dark: #ffffff;
+    --accent: #3a0ca3;
+    --accent-hover: #4361ee;
+    --text: #111;
+    --subtext: #333;
+    --card: #f0f0f0;
+  }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    transition: all 0.3s ease;
+  }
+  header {
+    background: var(--bg-dark);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  header h1 {
+    font-size: 1.8rem;
+    color: var(--accent);
+  }
+  nav a {
+    margin-right: 1rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .toggle-mode {
+    background: var(--accent);
+    border: none;
+    color: #000;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  main {
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem;
+  }
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background: var(--bg-dark);
+    color: var(--subtext);
+    margin-top: 3rem;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  .product {
+    background: var(--card);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  }
+  .product img {
+    max-width: 100%;
+    border-radius: 6px;
+  }
+  .product h3 {
+    color: var(--accent);
+    margin-top: 0.5rem;
+  }
+</style>
+
 </head>
 <body>
-  <header>
-    <h1>RetroTee 商品</h1>
-    <nav>
-      <a href="index.html">首頁</a>
-      <a href="about.html">關於我們</a>
-      <a href="cart.html">購物車</a>
-      <span id="cart-count" class="cart">0</span> <!-- 顯示購物車數量 -->
-    </nav>
-  </header>
+  
+<header>
+  <h1>RetroTee 復古潮T</h1>
+  <nav>
+    <a href="index.html">首頁</a>
+    <a href="products.html">商品</a>
+    <a href="about.html">關於我們</a>
+    <button class="toggle-mode" onclick="toggleMode()">切換模式</button>
+  </nav>
+</header>
+
   <main>
     <h2>商品一覽</h2>
     <div class="product-grid">
-      <!-- 商品卡片範例 -->
       <div class="product">
-        <img src="images/image_2.jpg" alt="復古黑膠 T 恤">
+        <img src="https://images.unsplash.com/photo-1585386959984-a415522510d9?w=600&q=80" alt="黑膠 T 恤">
         <h3>復古黑膠 T 恤</h3>
         <p>靈感來自黑膠封面，簡約又有型</p>
-        <button onclick="addToCart('復古黑膠 T 恤', 1)">加入購物車</button>
       </div>
       <div class="product">
-        <img src="images/image_3.jpg" alt="懷舊遊戲 T">
+        <img src="https://images.unsplash.com/photo-1585386959303-03d48cb42d68?w=600&q=80" alt="任天堂風格 T">
         <h3>懷舊遊戲 T</h3>
         <p>懷舊任天堂風格，像素圖案滿滿回憶</p>
-        <button onclick="addToCart('懷舊遊戲 T', 1)">加入購物車</button>
       </div>
       <div class="product">
-        <img src="images/image_4.jpg" alt="霓虹都市 T">
+        <img src="https://images.unsplash.com/photo-1618354691373-d6fce2f9c121?w=600&q=80" alt="霓虹城市風格 T">
         <h3>霓虹都市 T</h3>
         <p>夜景霓虹風，賽博龐克迷不可錯過</p>
-        <button onclick="addToCart('霓虹都市 T', 1)">加入購物車</button>
       </div>
     </div>
   </main>
-  <footer>
-    &copy; 2025 RetroTee 復古潮T | 設計與靈魂並存。
-  </footer>
+  
+<footer>
+  &copy; 2025 RetroTee 復古潮T | 設計與靈魂並存。
+</footer>
+<script>
+  function toggleMode() {
+    document.body.classList.toggle("light-mode");
+  }
+</script>
 
-  <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    // 顯示購物車數量
-    function updateCartCount() {
-      document.getElementById('cart-count').textContent = cart.length;
-    }
-
-    // 加入購物車
-    function addToCart(productName, quantity) {
-      let item = cart.find(item => item.name === productName);
-      if (item) {
-        item.quantity += quantity;
-      } else {
-        cart.push({ name: productName, quantity: quantity });
-      }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCartCount();
-    }
-
-    updateCartCount(); // 初次載入時更新購物車數量
-  </script>
 </body>
 </html>
