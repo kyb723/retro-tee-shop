@@ -3,100 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <title>結帳 - RetroTee</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-      padding: 2rem;
-    }
-    .checkout-form input {
-      margin: 10px 0;
-      padding: 10px;
-      width: 100%;
-      font-size: 1rem;
-    }
-    .checkout-form button {
-      background-color: #ff6347;
-      color: white;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-    }
-    .checkout-form button:hover {
-      background-color: #e53e34;
-    }
-    .order-summary {
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-    .order-summary span {
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header>
   <h1>結帳</h1>
-  <div class="order-summary">
-    <p>訂單總金額: <span id="total-price-summary">0</span></p>
-  </div>
-
-  <h2>請填寫收貨資訊</h2>
-  <div class="checkout-form">
-    <input type="text" id="name" placeholder="姓名" required />
-    <input type="email" id="email" placeholder="電子郵件" required />
-    <input type="text" id="address" placeholder="送貨地址" required />
-    <input type="text" id="phone" placeholder="電話號碼" required />
-    <button onclick="placeOrder()">確認訂單</button>
-  </div>
-
-  <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    // 計算總金額
-    function calculateTotal() {
-      let total = 0;
-      cart.forEach(item => {
-        const price = 500;  // 假設每件商品價格為 500
-        total += price * item.quantity;
-      });
-      document.getElementById('total-price-summary').textContent = total;
-    }
-
-    // 放置訂單
-    function placeOrder() {
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const address = document.getElementById('address').value;
-      const phone = document.getElementById('phone').value;
-
-      if (!name || !email || !address || !phone) {
-        alert("請填寫所有欄位！");
-        return;
-      }
-
-      // 模擬訂單資料送出
-      const orderDetails = {
-        name,
-        email,
-        address,
-        phone,
-        cart,
-        total: document.getElementById('total-price-summary').textContent,
-      };
-
-      // 顯示訂單確認訊息
-      alert(`訂單確認！\n\n姓名: ${name}\n電子郵件: ${email}\n送貨地址: ${address}\n訂單總金額: $${orderDetails.total}`);
-
-      // 清空購物車
-      localStorage.removeItem('cart');
-      cart = [];
-      // 可以引導使用者到訂單確認頁面
-      window.location.href = "order-confirmation.html";
-    }
-
-    calculateTotal(); // 初次載入時顯示總金額
-  </script>
+  <nav>
+    <a href="index.html">首頁</a>
+    <a href="products.html">商品</a>
+    <a href="about.html">關於我們</a>
+    <a href="cart.html">購物車</a>
+    <button class="toggle-mode" onclick="toggleMode()">切換模式</button>
+  </nav>
+</header>
+<main>
+  <h2>填寫結帳資訊</h2>
+  <form action="confirmation.html" method="GET">
+    <label>姓名: <input type="text" name="name" required></label><br>
+    <label>Email: <input type="email" name="email" required></label><br>
+    <label>地址: <input type="text" name="address" required></label><br>
+    <button type="submit">送出訂單</button>
+  </form>
+</main>
+<footer>&copy; 2025 RetroTee 復古潮T</footer>
+<script src="mode.js"></script>
 </body>
 </html>
