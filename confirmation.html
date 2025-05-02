@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>確認訂單 - RetroTee</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>訂單完成</h1>
+  <nav>
+    <a href="index.html">首頁</a>
+    <a href="products.html">商品</a>
+    <a href="about.html">關於我們</a>
+    <a href="cart.html">購物車</a>
+    <button class="toggle-mode" onclick="toggleMode()">切換模式</button>
+  </nav>
+</header>
+<main>
+  <h2>感謝您的訂購！</h2>
+  <p>我們已收到您的訂單並將盡快出貨。</p>
+</main>
+<footer>&copy; 2025 RetroTee 復古潮T</footer>
+<script src="mode.js"></script>
+<script>localStorage.removeItem("cart");</script>
+</body>
+</html>
