@@ -80,3 +80,27 @@ footer {
   color: var(--accent);
   margin-top: 0.5rem;
 }
+.checkout-form input {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      font-size: 1rem;
+    }
+    .checkout-form button {
+      background-color: #ff6347;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+    }
+    .checkout-form button:hover {
+      background-color: #e53e34;
+    }
+    .order-summary {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .order-summary span {
+      font-weight: bold;
+    }
