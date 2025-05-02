@@ -56,6 +56,7 @@
     <button class="toggle-mode" onclick="toggleMode()">切換模式</button>
   </nav>
 </header>
+<main>  
   <h1>你的購物車</h1>
   <div id="cart-items" class="cart-items">
     <!-- 購物車商品列表將動態生成 -->
@@ -67,7 +68,8 @@
     <button onclick="clearCart()">清空購物車</button>
     <button class="checkout-button" onclick="window.location.href='checkout.html'">結帳</button>
   </div>
-
+</main>
+  
   <script>
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
