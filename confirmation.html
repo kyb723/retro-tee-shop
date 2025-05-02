@@ -26,6 +26,22 @@
 </main>
 <footer>&copy; 2025 RetroTee 復古潮T</footer>
 <script src="mode.js"></script>
-<script>localStorage.removeItem("cart");</script>
+<script>
+  localStorage.removeItem("cart");
+  
+      // 初始載入時，根據 localStorage 設定模式
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode === 'light') {
+      document.body.classList.add('light-mode');
+    }
+  });
+
+  function toggleMode() {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    localStorage.setItem('mode', isLight ? 'light' : 'dark');
+  }
+</script>
 </body>
 </html>
